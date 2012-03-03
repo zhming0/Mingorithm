@@ -5,11 +5,12 @@
 #	DO NOT change the location of this script in case of removing unexpected files.
 #History:
 #	2012/02/20	Ming	First release
-function startclear() {
+function startclear {
 	echo "Cleaning $(pwd)"
+	echo *.o
 	for var in $(ls)
 	do
-		if test -d $var; then
+		if [ -d $var ]; then
 			#echo "$var is a directory."
 			cd $var
 			startclear
@@ -19,9 +20,9 @@ function startclear() {
 		elif [ -x $var ] && [ ! "$var" == "*.py" ]; then
 			echo "$var is a binary file, remove it!"
 			rm $var
-		elif [ $var == "*.o" ]; then
+		elif [ "$var" == "*.o" ]; then
 			echo "$var is an object file, remove it!"
-			rm $var
+			#rm $var
 		fi
 	done
 }
